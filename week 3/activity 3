@@ -1,0 +1,20 @@
+void convertToDoubly(SNode* headS, DNode* &headD, DNode* &lastD) {
+    if (!headS) {
+        headD = nullptr;
+        lastD = nullptr;
+        return;
+    }
+
+    headD = new DNode{headS->data, nullptr, nullptr};
+    DNode* currentD = headD;
+    SNode* currentS = headS->next;
+
+    while (currentS) {
+        DNode* newNode = new DNode{currentS->data, nullptr, currentD};
+        currentD->next = newNode;
+        currentD = newNode;
+        currentS = currentS->next;
+    }
+
+    lastD = currentD; // final node is last
+}
